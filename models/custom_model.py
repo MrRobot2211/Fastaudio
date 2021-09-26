@@ -558,13 +558,13 @@ class Filterbank(torch.nn.Module):
         if not self.freeze:
             self.f_central = torch.nn.Parameter(
                 self.f_central / (self.sample_rate * self.param_change_factor)
-            )
+            ).cuda()
             self.band = torch.nn.Parameter(
                 self.band / (self.sample_rate * self.param_change_factor)
-            )
+            ).cuda()
 
         # Frequency axis
-        all_freqs = torch.linspace(0, self.sample_rate // 2, self.n_stft)
+        all_freqs = torch.linspace(0, self.sample_rate // 2, self.n_stft).cuda()
 
         # Replicating for all the filters
         self.all_freqs_mat = all_freqs.repeat(self.f_central.shape[0], 1)
