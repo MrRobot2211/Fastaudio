@@ -577,8 +577,8 @@ class Filterbank(torch.nn.Module):
         x : tensor
             A batch of spectrogram tensors.
         """
-        f_central=torch.clamp(self.f_central, 0, 0.5)		
-        band=torch.clamp(self.band, 3.1/16000, 603.7/16000)		
+        f_central=torch.clamp(self.f_central, 0, 0.5).cuda()		
+        band=torch.clamp(self.band, 3.1/16000, 603.7/16000).cuda()		
         if self.sort:		
             f_central, _ = torch.sort(f_central)		
             band, _ = torch.sort(band)
